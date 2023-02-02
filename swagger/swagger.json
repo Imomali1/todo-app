@@ -1,0 +1,1762 @@
+{
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "swagger": "2.0",
+  "info": {
+    "description": "Documentation for Accounting API Gateway.\n\nSchemes:\nhttp, https",
+    "title": "Accounting API.",
+    "version": "0.1.0"
+  },
+  "basePath": "/",
+  "paths": {
+    "/api/user/auth/login": {
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "http",
+          "https"
+        ],
+        "tags": [
+          "default"
+        ],
+        "summary": "Login.",
+        "operationId": "Login",
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UserLoginRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/UserLoginResponse"
+          },
+          "422": {
+            "$ref": "#/responses/ErrorResponse"
+          }
+        }
+      }
+    },
+    "/api/user/auth/register": {
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "http",
+          "https"
+        ],
+        "tags": [
+          "default"
+        ],
+        "summary": "Registers new user.",
+        "operationId": "RegisterUser",
+        "parameters": [
+          {
+            "type": "string",
+            "x-go-name": "Token",
+            "name": "token",
+            "in": "query"
+          },
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UserRegisterRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/UserRegisterResponse"
+          },
+          "422": {
+            "$ref": "#/responses/ErrorResponse"
+          }
+        }
+      }
+    },
+    "/api/user/auth/reset-password": {
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "http",
+          "https"
+        ],
+        "tags": [
+          "default"
+        ],
+        "summary": "Reset Password.",
+        "operationId": "ResetPassword",
+        "parameters": [
+          {
+            "type": "string",
+            "x-go-name": "Key",
+            "name": "key",
+            "in": "query",
+            "required": true
+          },
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UserResetPasswordRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/UserResetPasswordResponse"
+          },
+          "422": {
+            "$ref": "#/responses/ErrorResponse"
+          }
+        }
+      }
+    },
+    "/api/user/auth/restore-password": {
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "http",
+          "https"
+        ],
+        "tags": [
+          "default"
+        ],
+        "summary": "Restore password.",
+        "operationId": "RestorePassword",
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UserRestorePasswordRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/UserRestorePasswordResponse"
+          },
+          "422": {
+            "$ref": "#/responses/ErrorResponse"
+          }
+        }
+      }
+    },
+    "/api/user/auth/restore-password-verify": {
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "http",
+          "https"
+        ],
+        "tags": [
+          "default"
+        ],
+        "summary": "Verifies restore password.",
+        "operationId": "RestorePasswordVerify",
+        "parameters": [
+          {
+            "type": "string",
+            "x-go-name": "Key",
+            "name": "key",
+            "in": "query",
+            "required": true
+          },
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UserRestorePasswordVerifyRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/UserRestorePasswordVerifyResponse"
+          },
+          "422": {
+            "$ref": "#/responses/ErrorResponse"
+          }
+        }
+      }
+    },
+    "/api/user/auth/verification/send-code": {
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "http",
+          "https"
+        ],
+        "tags": [
+          "default"
+        ],
+        "summary": "Sends verification code.",
+        "operationId": "SendVerification",
+        "parameters": [
+          {
+            "type": "string",
+            "x-go-name": "Key",
+            "name": "key",
+            "in": "query",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/UserVerificationCodeResponse"
+          },
+          "422": {
+            "$ref": "#/responses/ErrorResponse"
+          }
+        }
+      }
+    },
+    "/api/user/auth/verify": {
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "http",
+          "https"
+        ],
+        "tags": [
+          "default"
+        ],
+        "summary": "Verifies user.",
+        "operationId": "VerifyUser",
+        "parameters": [
+          {
+            "type": "string",
+            "x-go-name": "Key",
+            "name": "key",
+            "in": "query",
+            "required": true
+          },
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UserVerificationRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/UserVerificationResponse"
+          },
+          "422": {
+            "$ref": "#/responses/ErrorResponse"
+          }
+        }
+      }
+    },
+    "/api/v1/user/countries/list": {
+      "get": {
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "http",
+          "https"
+        ],
+        "tags": [
+          "default"
+        ],
+        "summary": "Lists currencies.",
+        "operationId": "ListCurrencies",
+        "responses": {
+          "200": {
+            "$ref": "#/responses/CurrencyListResponse"
+          },
+          "422": {
+            "$ref": "#/responses/ErrorResponse"
+          }
+        }
+      }
+    },
+    "/api/v1/user/invitations/cancel/{pk}": {
+      "post": {
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "http",
+          "https"
+        ],
+        "tags": [
+          "default"
+        ],
+        "summary": "Cancel Invitation.",
+        "operationId": "ResendInvitation",
+        "parameters": [
+          {
+            "type": "string",
+            "x-go-name": "Pk",
+            "name": "pk",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/InvitationResendResponse"
+          },
+          "422": {
+            "$ref": "#/responses/ErrorResponse"
+          }
+        }
+      }
+    },
+    "/api/v1/user/invitations/list": {
+      "get": {
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "http",
+          "https"
+        ],
+        "tags": [
+          "default"
+        ],
+        "summary": "List invitations.",
+        "operationId": "ListInvitations",
+        "responses": {
+          "200": {
+            "$ref": "#/responses/InvitationListResponse"
+          },
+          "422": {
+            "$ref": "#/responses/ErrorResponse"
+          }
+        }
+      }
+    },
+    "/api/v1/user/invitations/send": {
+      "post": {
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "http",
+          "https"
+        ],
+        "tags": [
+          "default"
+        ],
+        "summary": "Sends invitation.",
+        "operationId": "SendInvitation",
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UserInviteRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/UserInviteResponse"
+          },
+          "422": {
+            "$ref": "#/responses/ErrorResponse"
+          }
+        }
+      }
+    },
+    "/api/v1/user/payment-terms/list": {
+      "get": {
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "http",
+          "https"
+        ],
+        "tags": [
+          "default"
+        ],
+        "summary": "List payment terms.",
+        "operationId": "ListPaymentTerms",
+        "responses": {
+          "200": {
+            "$ref": "#/responses/PaymentTermsListResponse"
+          },
+          "422": {
+            "$ref": "#/responses/ErrorResponse"
+          }
+        }
+      }
+    },
+    "/api/v1/user/users/list": {
+      "get": {
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "http",
+          "https"
+        ],
+        "tags": [
+          "default"
+        ],
+        "summary": "Returns users' list.",
+        "operationId": "ListUsers",
+        "responses": {
+          "200": {
+            "$ref": "#/responses/UserListResponse"
+          },
+          "422": {
+            "$ref": "#/responses/ErrorResponse"
+          }
+        }
+      }
+    },
+    "/api/v1/user/users/me": {
+      "get": {
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "http",
+          "https"
+        ],
+        "tags": [
+          "default"
+        ],
+        "summary": "Returns user's homepage.",
+        "operationId": "GetMe",
+        "parameters": [
+          {
+            "type": "string",
+            "x-go-name": "Token",
+            "name": "token",
+            "in": "query",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/UserMeResponse"
+          },
+          "422": {
+            "$ref": "#/responses/ErrorResponse"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "BusinessTypes": {
+      "type": "string",
+      "x-go-package": "github.com/GoldenPeople/api-gateway-golang/gateway/auth/models/models"
+    },
+    "CountryData": {
+      "type": "object",
+      "required": [
+        "id",
+        "name",
+        "code"
+      ],
+      "properties": {
+        "code": {
+          "type": "string",
+          "x-go-name": "Code"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int64",
+          "x-go-name": "Id"
+        },
+        "name": {
+          "type": "string",
+          "x-go-name": "Name"
+        }
+      },
+      "x-go-package": "github.com/GoldenPeople/api-gateway-golang/gateway/auth/models/models"
+    },
+    "CountryListResponse": {
+      "type": "object",
+      "required": [
+        "code",
+        "errors",
+        "result",
+        "total_count"
+      ],
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int64",
+          "x-go-name": "Code"
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Error"
+          },
+          "x-go-name": "Errors"
+        },
+        "result": {
+          "$ref": "#/definitions/CountryData"
+        },
+        "total_count": {
+          "type": "integer",
+          "format": "int64",
+          "x-go-name": "TotalCount"
+        }
+      },
+      "x-go-package": "github.com/GoldenPeople/api-gateway-golang/gateway/auth/models/response"
+    },
+    "CurrencyData": {
+      "type": "object",
+      "required": [
+        "id",
+        "name",
+        "code"
+      ],
+      "properties": {
+        "code": {
+          "type": "string",
+          "x-go-name": "Code"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int64",
+          "x-go-name": "Id"
+        },
+        "name": {
+          "type": "string",
+          "x-go-name": "Name"
+        }
+      },
+      "x-go-package": "github.com/GoldenPeople/api-gateway-golang/gateway/auth/models/models"
+    },
+    "CurrencyListResponse": {
+      "type": "object",
+      "required": [
+        "code",
+        "errors",
+        "result",
+        "total_count"
+      ],
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int64",
+          "x-go-name": "Code"
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Error"
+          },
+          "x-go-name": "Errors"
+        },
+        "result": {
+          "$ref": "#/definitions/CurrencyData"
+        },
+        "total_count": {
+          "type": "integer",
+          "format": "int64",
+          "x-go-name": "TotalCount"
+        }
+      },
+      "x-go-package": "github.com/GoldenPeople/api-gateway-golang/gateway/auth/models/response"
+    },
+    "Error": {
+      "type": "object",
+      "required": [
+        "loc",
+        "msg",
+        "type"
+      ],
+      "properties": {
+        "loc": {
+          "description": "Location",
+          "type": "string",
+          "x-go-name": "Loc"
+        },
+        "msg": {
+          "description": "Message",
+          "type": "string",
+          "x-go-name": "Msg"
+        },
+        "type": {
+          "description": "Type",
+          "type": "string",
+          "x-go-name": "Type"
+        }
+      },
+      "x-go-package": "github.com/GoldenPeople/api-gateway-golang/gateway/auth/exceptions"
+    },
+    "InvitationCancelResponse": {
+      "type": "object",
+      "required": [
+        "code",
+        "errors"
+      ],
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int64",
+          "x-go-name": "Code"
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Error"
+          },
+          "x-go-name": "Errors"
+        }
+      },
+      "x-go-package": "github.com/GoldenPeople/api-gateway-golang/gateway/auth/models/response"
+    },
+    "InvitationData": {
+      "type": "object",
+      "required": [
+        "id",
+        "status",
+        "user",
+        "role"
+      ],
+      "properties": {
+        "email": {
+          "type": "string",
+          "format": "email",
+          "x-go-name": "Email"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int64",
+          "x-go-name": "Id"
+        },
+        "role": {
+          "$ref": "#/definitions/RoleData"
+        },
+        "status": {
+          "type": "string",
+          "x-go-name": "Status"
+        },
+        "user": {
+          "$ref": "#/definitions/UserInvitationData"
+        }
+      },
+      "x-go-package": "github.com/GoldenPeople/api-gateway-golang/gateway/auth/models/models"
+    },
+    "InvitationListResponse": {
+      "type": "object",
+      "required": [
+        "code",
+        "errors",
+        "result",
+        "total_count"
+      ],
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int64",
+          "x-go-name": "Code"
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Error"
+          },
+          "x-go-name": "Errors"
+        },
+        "result": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InvitationData"
+          },
+          "x-go-name": "Result"
+        },
+        "total_count": {
+          "type": "integer",
+          "format": "int64",
+          "x-go-name": "TotalCount"
+        }
+      },
+      "x-go-package": "github.com/GoldenPeople/api-gateway-golang/gateway/auth/models/response"
+    },
+    "InvitationResendResponse": {
+      "type": "object",
+      "required": [
+        "code",
+        "errors"
+      ],
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int64",
+          "x-go-name": "Code"
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Error"
+          },
+          "x-go-name": "Errors"
+        }
+      },
+      "x-go-package": "github.com/GoldenPeople/api-gateway-golang/gateway/auth/models/response"
+    },
+    "ObjID": {
+      "type": "object",
+      "required": [
+        "id"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64",
+          "x-go-name": "Id"
+        }
+      },
+      "x-go-package": "github.com/GoldenPeople/api-gateway-golang/gateway/auth/models/models"
+    },
+    "OwnerData": {
+      "type": "object",
+      "required": [
+        "id",
+        "first_name",
+        "last_name"
+      ],
+      "properties": {
+        "email": {
+          "type": "string",
+          "format": "email",
+          "x-go-name": "Email"
+        },
+        "first_name": {
+          "type": "string",
+          "x-go-name": "FirstName"
+        },
+        "id": {
+          "type": "string",
+          "x-go-name": "Id"
+        },
+        "last_name": {
+          "type": "string",
+          "x-go-name": "LastName"
+        }
+      },
+      "x-go-package": "github.com/GoldenPeople/api-gateway-golang/gateway/auth/models/models"
+    },
+    "PaymentTermsListResponse": {
+      "type": "object",
+      "required": [
+        "code",
+        "errors",
+        "result",
+        "total_count"
+      ],
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int64",
+          "x-go-name": "Code"
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Error"
+          },
+          "x-go-name": "Errors"
+        },
+        "result": {
+          "$ref": "#/definitions/CurrencyData"
+        },
+        "total_count": {
+          "type": "integer",
+          "format": "int64",
+          "x-go-name": "TotalCount"
+        }
+      },
+      "x-go-package": "github.com/GoldenPeople/api-gateway-golang/gateway/auth/models/response"
+    },
+    "RegimeTypes": {
+      "type": "string",
+      "x-go-package": "github.com/GoldenPeople/api-gateway-golang/gateway/auth/models/models"
+    },
+    "RoleData": {
+      "type": "object",
+      "required": [
+        "id",
+        "name",
+        "code"
+      ],
+      "properties": {
+        "code": {
+          "type": "string",
+          "x-go-name": "Code"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int64",
+          "x-go-name": "Id"
+        },
+        "name": {
+          "type": "string",
+          "x-go-name": "Name"
+        }
+      },
+      "x-go-package": "github.com/GoldenPeople/api-gateway-golang/gateway/auth/models/models"
+    },
+    "UserData": {
+      "type": "object",
+      "required": [
+        "id",
+        "first_name",
+        "last_name",
+        "type",
+        "regime_type",
+        "dpi_number",
+        "nit_number",
+        "business_type",
+        "registration_qa",
+        "role",
+        "created_at",
+        "updated_at"
+      ],
+      "properties": {
+        "business_type": {
+          "type": "string",
+          "x-go-name": "BusinessType"
+        },
+        "created_at": {
+          "type": "string",
+          "x-go-name": "CreatedAt",
+          "example": "10.10.2010"
+        },
+        "dpi_number": {
+          "type": "string",
+          "x-go-name": "DPINumber"
+        },
+        "email": {
+          "type": "string",
+          "format": "email",
+          "x-go-name": "Email"
+        },
+        "first_name": {
+          "type": "string",
+          "x-go-name": "FirstName"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int64",
+          "x-go-name": "Id"
+        },
+        "last_name": {
+          "type": "string",
+          "x-go-name": "LastName"
+        },
+        "nit_number": {
+          "type": "string",
+          "x-go-name": "NITNumber"
+        },
+        "regime_type": {
+          "type": "string",
+          "x-go-name": "RegimeType"
+        },
+        "registration_qa": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-go-name": "RegistrationQA"
+        },
+        "role": {
+          "$ref": "#/definitions/RoleData"
+        },
+        "type": {
+          "type": "string",
+          "x-go-name": "Type"
+        },
+        "updated_at": {
+          "type": "string",
+          "x-go-name": "UpdatedAt",
+          "example": "10.10.2010"
+        }
+      },
+      "x-go-package": "github.com/GoldenPeople/api-gateway-golang/gateway/auth/models/models"
+    },
+    "UserForgotPasswordResponseData": {
+      "type": "object",
+      "required": [
+        "key",
+        "expires_after"
+      ],
+      "properties": {
+        "expires_after": {
+          "type": "integer",
+          "format": "int64",
+          "x-go-name": "ExpiresAfter"
+        },
+        "key": {
+          "type": "string",
+          "x-go-name": "Key"
+        }
+      },
+      "x-go-package": "github.com/GoldenPeople/api-gateway-golang/gateway/auth/models/response"
+    },
+    "UserInvitationData": {
+      "type": "object",
+      "required": [
+        "id",
+        "first_name",
+        "last_name"
+      ],
+      "properties": {
+        "email": {
+          "type": "string",
+          "format": "email",
+          "x-go-name": "Email"
+        },
+        "first_name": {
+          "type": "string",
+          "x-go-name": "FirstName"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int64",
+          "x-go-name": "Id"
+        },
+        "last_name": {
+          "type": "string",
+          "x-go-name": "LastName"
+        }
+      },
+      "x-go-package": "github.com/GoldenPeople/api-gateway-golang/gateway/auth/models/models"
+    },
+    "UserInviteRequest": {
+      "type": "object",
+      "required": [
+        "data"
+      ],
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/UserInviteRequestData"
+        }
+      },
+      "x-go-package": "github.com/GoldenPeople/api-gateway-golang/gateway/auth/models/request"
+    },
+    "UserInviteRequestData": {
+      "type": "object",
+      "required": [
+        "role"
+      ],
+      "properties": {
+        "email": {
+          "type": "string",
+          "format": "email",
+          "x-go-name": "Email"
+        },
+        "role": {
+          "$ref": "#/definitions/ObjID"
+        }
+      },
+      "x-go-package": "github.com/GoldenPeople/api-gateway-golang/gateway/auth/models/request"
+    },
+    "UserInviteResponse": {
+      "type": "object",
+      "required": [
+        "code",
+        "errors"
+      ],
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int64",
+          "x-go-name": "Code"
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Error"
+          },
+          "x-go-name": "Errors"
+        }
+      },
+      "x-go-package": "github.com/GoldenPeople/api-gateway-golang/gateway/auth/models/response"
+    },
+    "UserListResponse": {
+      "type": "object",
+      "required": [
+        "code",
+        "errors",
+        "result",
+        "total_count"
+      ],
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int64",
+          "x-go-name": "Code"
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Error"
+          },
+          "x-go-name": "Errors"
+        },
+        "result": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UserData"
+          },
+          "x-go-name": "Result"
+        },
+        "total_count": {
+          "type": "integer",
+          "format": "int64",
+          "x-go-name": "TotalCount"
+        }
+      },
+      "x-go-package": "github.com/GoldenPeople/api-gateway-golang/gateway/auth/models/response"
+    },
+    "UserLoginRequest": {
+      "type": "object",
+      "required": [
+        "password"
+      ],
+      "properties": {
+        "email": {
+          "type": "string",
+          "format": "email",
+          "x-go-name": "Email"
+        },
+        "password": {
+          "type": "string",
+          "x-go-name": "Password"
+        }
+      },
+      "x-go-package": "github.com/GoldenPeople/api-gateway-golang/gateway/auth/models/request"
+    },
+    "UserLoginResponse": {
+      "type": "object",
+      "required": [
+        "code",
+        "errors",
+        "result"
+      ],
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int64",
+          "x-go-name": "Code"
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Error"
+          },
+          "x-go-name": "Errors"
+        },
+        "result": {
+          "$ref": "#/definitions/UserLoginResponseData"
+        }
+      },
+      "x-go-package": "github.com/GoldenPeople/api-gateway-golang/gateway/auth/models/response"
+    },
+    "UserLoginResponseData": {
+      "type": "object",
+      "required": [
+        "id",
+        "token"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64",
+          "x-go-name": "Id"
+        },
+        "token": {
+          "type": "string",
+          "x-go-name": "Token"
+        }
+      },
+      "x-go-package": "github.com/GoldenPeople/api-gateway-golang/gateway/auth/models/response"
+    },
+    "UserMeData": {
+      "type": "object",
+      "required": [
+        "id",
+        "first_name",
+        "last_name",
+        "type",
+        "regime_type",
+        "dpi_number",
+        "nit_number",
+        "business_type",
+        "owner",
+        "role",
+        "created_at",
+        "updated_at"
+      ],
+      "properties": {
+        "business_type": {
+          "type": "string",
+          "x-go-name": "BusinessType"
+        },
+        "created_at": {
+          "type": "string",
+          "x-go-name": "CreatedAt",
+          "example": "10.10.2010"
+        },
+        "dpi_number": {
+          "type": "string",
+          "x-go-name": "DPINumber"
+        },
+        "email": {
+          "type": "string",
+          "format": "email",
+          "x-go-name": "Email"
+        },
+        "first_name": {
+          "type": "string",
+          "x-go-name": "FirstName"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int64",
+          "x-go-name": "Id"
+        },
+        "last_name": {
+          "type": "string",
+          "x-go-name": "LastName"
+        },
+        "nit_number": {
+          "type": "string",
+          "x-go-name": "NITNumber"
+        },
+        "owner": {
+          "$ref": "#/definitions/OwnerData"
+        },
+        "regime_type": {
+          "type": "string",
+          "x-go-name": "RegimeType"
+        },
+        "role": {
+          "$ref": "#/definitions/RoleData"
+        },
+        "type": {
+          "type": "string",
+          "x-go-name": "Type"
+        },
+        "updated_at": {
+          "type": "string",
+          "x-go-name": "UpdatedAt",
+          "example": "10.10.2010"
+        }
+      },
+      "x-go-package": "github.com/GoldenPeople/api-gateway-golang/gateway/auth/models/models"
+    },
+    "UserMeResponse": {
+      "type": "object",
+      "required": [
+        "code",
+        "errors",
+        "result"
+      ],
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int64",
+          "x-go-name": "Code"
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Error"
+          },
+          "x-go-name": "Errors"
+        },
+        "result": {
+          "$ref": "#/definitions/UserMeData"
+        }
+      },
+      "x-go-package": "github.com/GoldenPeople/api-gateway-golang/gateway/auth/models/response"
+    },
+    "UserRegisterData": {
+      "type": "object",
+      "required": [
+        "first_name",
+        "last_name",
+        "password",
+        "conf_password",
+        "type",
+        "regime_type",
+        "dpi_number",
+        "nit_number",
+        "business_type",
+        "registration_qa"
+      ],
+      "properties": {
+        "business_type": {
+          "$ref": "#/definitions/BusinessTypes"
+        },
+        "conf_password": {
+          "type": "string",
+          "x-go-name": "ConfPassword"
+        },
+        "dpi_number": {
+          "type": "string",
+          "x-go-name": "DPINumber"
+        },
+        "email": {
+          "type": "string",
+          "format": "email",
+          "x-go-name": "Email"
+        },
+        "first_name": {
+          "type": "string",
+          "x-go-name": "FirstName"
+        },
+        "last_name": {
+          "type": "string",
+          "x-go-name": "LastName"
+        },
+        "nit_number": {
+          "type": "string",
+          "x-go-name": "NITNumber"
+        },
+        "password": {
+          "type": "string",
+          "x-go-name": "Password"
+        },
+        "regime_type": {
+          "$ref": "#/definitions/RegimeTypes"
+        },
+        "registration_qa": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-go-name": "RegistrationQA"
+        },
+        "type": {
+          "$ref": "#/definitions/UserTypes"
+        }
+      },
+      "x-go-package": "github.com/GoldenPeople/api-gateway-golang/gateway/auth/models/models"
+    },
+    "UserRegisterRequest": {
+      "type": "object",
+      "required": [
+        "user"
+      ],
+      "properties": {
+        "user": {
+          "$ref": "#/definitions/UserRegisterData"
+        }
+      },
+      "x-go-package": "github.com/GoldenPeople/api-gateway-golang/gateway/auth/models/request"
+    },
+    "UserRegisterResponse": {
+      "type": "object",
+      "required": [
+        "code",
+        "errors",
+        "result"
+      ],
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int64",
+          "x-go-name": "Code"
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Error"
+          },
+          "x-go-name": "Errors"
+        },
+        "result": {
+          "$ref": "#/definitions/UserRegisterResponseData"
+        }
+      },
+      "x-go-package": "github.com/GoldenPeople/api-gateway-golang/gateway/auth/models/response"
+    },
+    "UserRegisterResponseData": {
+      "type": "object",
+      "required": [
+        "key",
+        "expires_after"
+      ],
+      "properties": {
+        "expires_after": {
+          "type": "integer",
+          "format": "int64",
+          "x-go-name": "ExpiresAfter"
+        },
+        "key": {
+          "type": "string",
+          "x-go-name": "Key"
+        }
+      },
+      "x-go-package": "github.com/GoldenPeople/api-gateway-golang/gateway/auth/models/response"
+    },
+    "UserResetPasswordRequest": {
+      "type": "object",
+      "required": [
+        "password",
+        "conf_password"
+      ],
+      "properties": {
+        "conf_password": {
+          "type": "string",
+          "x-go-name": "ConfPassword"
+        },
+        "password": {
+          "type": "string",
+          "x-go-name": "Password"
+        }
+      },
+      "x-go-package": "github.com/GoldenPeople/api-gateway-golang/gateway/auth/models/request"
+    },
+    "UserResetPasswordResponse": {
+      "type": "object",
+      "required": [
+        "code",
+        "errors"
+      ],
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int64",
+          "x-go-name": "Code"
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Error"
+          },
+          "x-go-name": "Errors"
+        }
+      },
+      "x-go-package": "github.com/GoldenPeople/api-gateway-golang/gateway/auth/models/response"
+    },
+    "UserRestorePasswordRequest": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "format": "email",
+          "x-go-name": "Email"
+        }
+      },
+      "x-go-package": "github.com/GoldenPeople/api-gateway-golang/gateway/auth/models/request"
+    },
+    "UserRestorePasswordResponse": {
+      "type": "object",
+      "required": [
+        "code",
+        "errors",
+        "result"
+      ],
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int64",
+          "x-go-name": "Code"
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Error"
+          },
+          "x-go-name": "Errors"
+        },
+        "result": {
+          "$ref": "#/definitions/UserForgotPasswordResponseData"
+        }
+      },
+      "x-go-package": "github.com/GoldenPeople/api-gateway-golang/gateway/auth/models/response"
+    },
+    "UserRestorePasswordVerifyRequest": {
+      "type": "object",
+      "required": [
+        "code"
+      ],
+      "properties": {
+        "code": {
+          "type": "string",
+          "x-go-name": "Code"
+        }
+      },
+      "x-go-package": "github.com/GoldenPeople/api-gateway-golang/gateway/auth/models/request"
+    },
+    "UserRestorePasswordVerifyResponse": {
+      "type": "object",
+      "required": [
+        "code",
+        "errors",
+        "result"
+      ],
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int64",
+          "x-go-name": "Code"
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Error"
+          },
+          "x-go-name": "Errors"
+        },
+        "result": {
+          "$ref": "#/definitions/UserRestorePasswordVerifyResponseData"
+        }
+      },
+      "x-go-package": "github.com/GoldenPeople/api-gateway-golang/gateway/auth/models/response"
+    },
+    "UserRestorePasswordVerifyResponseData": {
+      "type": "object",
+      "required": [
+        "key"
+      ],
+      "properties": {
+        "key": {
+          "type": "string",
+          "x-go-name": "Key"
+        }
+      },
+      "x-go-package": "github.com/GoldenPeople/api-gateway-golang/gateway/auth/models/response"
+    },
+    "UserTypes": {
+      "description": "required: ture",
+      "type": "string",
+      "x-go-package": "github.com/GoldenPeople/api-gateway-golang/gateway/auth/models/models"
+    },
+    "UserVerificationCodeResponse": {
+      "type": "object",
+      "required": [
+        "code",
+        "errors",
+        "result"
+      ],
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int64",
+          "x-go-name": "Code"
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Error"
+          },
+          "x-go-name": "Errors"
+        },
+        "result": {
+          "$ref": "#/definitions/UserVerificationCodeResponseData"
+        }
+      },
+      "x-go-package": "github.com/GoldenPeople/api-gateway-golang/gateway/auth/models/response"
+    },
+    "UserVerificationCodeResponseData": {
+      "type": "object",
+      "required": [
+        "key",
+        "expires_after"
+      ],
+      "properties": {
+        "expires_after": {
+          "type": "integer",
+          "format": "int64",
+          "x-go-name": "ExpiresAfter"
+        },
+        "key": {
+          "type": "string",
+          "x-go-name": "Key"
+        }
+      },
+      "x-go-package": "github.com/GoldenPeople/api-gateway-golang/gateway/auth/models/response"
+    },
+    "UserVerificationRequest": {
+      "type": "object",
+      "required": [
+        "code"
+      ],
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int64",
+          "x-go-name": "Code"
+        }
+      },
+      "x-go-package": "github.com/GoldenPeople/api-gateway-golang/gateway/auth/models/request"
+    },
+    "UserVerificationResponse": {
+      "type": "object",
+      "required": [
+        "code",
+        "errors",
+        "result"
+      ],
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int64",
+          "x-go-name": "Code"
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Error"
+          },
+          "x-go-name": "Errors"
+        },
+        "result": {
+          "$ref": "#/definitions/UserVerificationResponseData"
+        }
+      },
+      "x-go-package": "github.com/GoldenPeople/api-gateway-golang/gateway/auth/models/response"
+    },
+    "UserVerificationResponseData": {
+      "type": "object",
+      "required": [
+        "id",
+        "token"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64",
+          "x-go-name": "Id"
+        },
+        "token": {
+          "type": "string",
+          "x-go-name": "Token"
+        }
+      },
+      "x-go-package": "github.com/GoldenPeople/api-gateway-golang/gateway/auth/models/response"
+    }
+  },
+  "responses": {
+    "CountryListResponse": {
+      "description": "Success Response",
+      "schema": {
+        "$ref": "#/definitions/CountryListResponse"
+      }
+    },
+    "CurrencyListResponse": {
+      "description": "Success Response",
+      "schema": {
+        "$ref": "#/definitions/CurrencyListResponse"
+      }
+    },
+    "ErrorResponse": {
+      "description": "",
+      "schema": {
+        "$ref": "#/definitions/Error"
+      }
+    },
+    "InvitationCancelResponse": {
+      "description": "Success Response",
+      "schema": {
+        "$ref": "#/definitions/InvitationCancelResponse"
+      }
+    },
+    "InvitationListResponse": {
+      "description": "Success Response",
+      "schema": {
+        "$ref": "#/definitions/InvitationListResponse"
+      }
+    },
+    "InvitationResendResponse": {
+      "description": "Success Response",
+      "schema": {
+        "$ref": "#/definitions/InvitationResendResponse"
+      }
+    },
+    "PaymentTermsListResponse": {
+      "description": "Success Response",
+      "schema": {
+        "$ref": "#/definitions/PaymentTermsListResponse"
+      }
+    },
+    "UserInviteResponse": {
+      "description": "Success Response",
+      "schema": {
+        "$ref": "#/definitions/UserInviteResponse"
+      }
+    },
+    "UserListResponse": {
+      "description": "Success Response",
+      "schema": {
+        "$ref": "#/definitions/UserListResponse"
+      }
+    },
+    "UserLoginResponse": {
+      "description": "Success Response",
+      "schema": {
+        "$ref": "#/definitions/UserLoginResponse"
+      }
+    },
+    "UserMeResponse": {
+      "description": "Success Response",
+      "schema": {
+        "$ref": "#/definitions/UserMeResponse"
+      }
+    },
+    "UserRegisterResponse": {
+      "description": "Success Response",
+      "schema": {
+        "$ref": "#/definitions/UserRegisterResponse"
+      }
+    },
+    "UserResetPasswordResponse": {
+      "description": "Success Response",
+      "schema": {
+        "$ref": "#/definitions/UserResetPasswordResponse"
+      }
+    },
+    "UserRestorePasswordResponse": {
+      "description": "Success Response",
+      "schema": {
+        "$ref": "#/definitions/UserRestorePasswordResponse"
+      }
+    },
+    "UserRestorePasswordVerifyResponse": {
+      "description": "Success Response",
+      "schema": {
+        "$ref": "#/definitions/UserRestorePasswordVerifyResponse"
+      }
+    },
+    "UserVerificationCodeResponse": {
+      "description": "Success Response",
+      "schema": {
+        "$ref": "#/definitions/UserVerificationCodeResponse"
+      }
+    },
+    "UserVerificationResponse": {
+      "description": "Success Response",
+      "schema": {
+        "$ref": "#/definitions/UserVerificationResponse"
+      }
+    }
+  },
+  "securityDefinitions": {
+    "api_key": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+    }
+  },
+  "security": [
+    {
+      "api_key": []
+    }
+  ]
+}
