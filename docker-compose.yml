@@ -1,0 +1,23 @@
+version: '3.9'
+services:
+  gateway:
+    build: .
+    command: /main
+    depends_on:
+      - cache
+    ports:
+      - "8050:8050"
+    environment:
+      REDIS_HOST: "cache"
+      REDIS_PORT: ":6379"
+    links:
+      - cache
+  cache:
+    image: redis:latest
+    restart: always
+    ports:
+      - '6379:6379'
+    volumes:
+      - cache:/data
+volumes:
+  cache:
