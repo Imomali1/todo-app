@@ -1,41 +1,50 @@
 package config
 
 import (
-	"github.com/spf13/cast"
 	"os"
+
+	"github.com/spf13/cast"
 )
 
 type Configs struct {
-	HTTPHost string
-	HTTPPort string
+	HTTP            HTTPConfig
+	Redis           RedisConfig
+	CtxTimeout      int
+	UserServicePath string
+	LogLevel        string
+}
 
-	PostgresHost string
-	PostgresPort string
+type HTTPConfig struct {
+	Host string
+	Port string
+}
 
-	MongoHost string
-	MongoPort string
+type RedisConfig struct {
+	Host     string
+	Port     string
+	Password string
+	DB       int
 }
 
 func Load() Configs {
-	conf := Configs{}
+	cfg := Configs{}
 
-	conf.HTTPHost = cast.ToString(getEnvOrDefault("HTTP_HOST", "localhost"))
-	conf.HTTPPort = cast.ToString(getEnvOrDefault("HTTP_PORT", "8080"))
+	cfg.HTTP.Host = cast.ToString(getOrReturnDefault("HTTP_HOST", "localhost"))
+	cfg.HTTP.Port = cast.ToString(getOrReturnDefault("HTTP_PORT", ":8050"))
 
-	conf.PostgresHost = cast.ToString(getEnvOrDefault("POSTGRES_HOST", "localhost"))
-	conf.PostgresPort = cast.ToString(getEnvOrDefault("POSTGRES_PORT", "5432"))
+	cfg.Redis.Host = cast.ToString(getOrReturnDefault("REDIS_HOST", "cache"))
+	cfg.Redis.Port = cast.ToString(getOrReturnDefault("REDIS_PORT", ":6379"))
+	cfg.Redis.Password = cast.ToString(getOrReturnDefault("REDIS_PASSWORD", ""))
+	cfg.CtxTimeout = cast.ToInt(getOrReturnDefault("REDIS_DB", 0))
 
-	conf.MongoHost = cast.ToString(getEnvOrDefault("MONGO_HOST", "localhost"))
-	conf.MongoPort = cast.ToString(getEnvOrDefault("MONGO_PORT", "27020"))
-
-	return conf
+	return cfg
 }
 
-func getEnvOrDefault(key string, def interface{}) interface{} {
+func getOrReturnDefault(key string, defaultValue interface{}) interface{} {
 	_, exists := os.LookupEnv(key)
-	if !exists {
+	if exists {
 		return os.Getenv(key)
 	}
 
-	return def
+	return defaultValue
 }
