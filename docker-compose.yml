@@ -2,11 +2,11 @@ version: '3.9'
 services:
   gateway:
     build: .
-    command: /main
+    command: /cmd
     depends_on:
       - cache
     ports:
-      - "8050:8050"
+      - "8080:8080"
     environment:
       REDIS_HOST: "cache"
       REDIS_PORT: ":6379"
