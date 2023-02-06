@@ -1,6 +1,7 @@
 package api
 
 import (
+	"github.com/Imomali1/todo-app/core"
 	"io"
 	"net/http"
 	"os"
@@ -19,6 +20,7 @@ import (
 type Option struct {
 	Conf  config.Configs
 	Cache cache.Cache
+	DB    core.PostgresClient
 }
 
 type Handler struct {
@@ -29,7 +31,7 @@ type Handler struct {
 
 func NewRouter(option Option) *gin.Engine {
 	gin.DefaultWriter = io.MultiWriter(os.Stdout)
-	//gin.SetMode(gin.ReleaseMode)
+	gin.SetMode(gin.ReleaseMode)
 
 	router := gin.New()
 

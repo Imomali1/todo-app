@@ -2,6 +2,7 @@ package cache
 
 import (
 	"context"
+	"fmt"
 	"github.com/Imomali1/todo-app/config"
 	"github.com/redis/go-redis/v9"
 	"time"
@@ -14,7 +15,7 @@ type Cache struct {
 func NewClient(conf config.Configs) *Cache {
 	client := &Cache{
 		Client: redis.NewClient(&redis.Options{
-			Addr:     conf.Redis.Host + conf.Redis.Port,
+			Addr:     fmt.Sprintf("%s:%d", conf.Redis.Host, conf.Redis.Port),
 			Password: conf.Redis.Password,
 			DB:       conf.Redis.DB,
 		}),

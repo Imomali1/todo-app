@@ -7,35 +7,44 @@ import (
 )
 
 type Configs struct {
-	HTTP            HTTPConfig
-	Redis           RedisConfig
-	CtxTimeout      int
-	UserServicePath string
-	LogLevel        string
+	HTTP     HTTPConfigs
+	Postgres PostgresConfigs
+	Redis    RedisConfigs
 }
 
-type HTTPConfig struct {
+type HTTPConfigs struct {
 	Host string
-	Port string
+	Port int
 }
 
-type RedisConfig struct {
+type RedisConfigs struct {
 	Host     string
-	Port     string
+	Port     int
 	Password string
 	DB       int
 }
 
-func Load() Configs {
-	cfg := Configs{}
+type PostgresConfigs struct {
+	Host     string
+	Port     int
+	User     string
+	Password string
+	DB       string
+}
+
+func Load() *Configs {
+	cfg := &Configs{}
 
 	cfg.HTTP.Host = cast.ToString(getOrReturnDefault("HTTP_HOST", "localhost"))
-	cfg.HTTP.Port = cast.ToString(getOrReturnDefault("HTTP_PORT", ":8050"))
+	cfg.HTTP.Port = cast.ToInt(getOrReturnDefault("HTTP_PORT", 8080))
 
 	cfg.Redis.Host = cast.ToString(getOrReturnDefault("REDIS_HOST", "cache"))
-	cfg.Redis.Port = cast.ToString(getOrReturnDefault("REDIS_PORT", ":6379"))
+	cfg.Redis.Port = cast.ToInt(getOrReturnDefault("REDIS_PORT", 6379))
 	cfg.Redis.Password = cast.ToString(getOrReturnDefault("REDIS_PASSWORD", ""))
-	cfg.CtxTimeout = cast.ToInt(getOrReturnDefault("REDIS_DB", 0))
+	cfg.Redis.DB = cast.ToInt(getOrReturnDefault("REDIS_DB", 0))
+
+	cfg.Postgres.Host = cast.ToString(getOrReturnDefault("POSTGRES_HOST", "postgres"))
+	cfg.Postgres.Port = cast.ToInt(getOrReturnDefault("POSTGRES_PORT", 5432))
 
 	return cfg
 }
