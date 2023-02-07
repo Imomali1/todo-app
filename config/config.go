@@ -32,8 +32,8 @@ type PostgresConfigs struct {
 	DB       string
 }
 
-func Load() *Configs {
-	cfg := &Configs{}
+func Load() Configs {
+	cfg := Configs{}
 
 	cfg.HTTP.Host = cast.ToString(getOrReturnDefault("HTTP_HOST", "localhost"))
 	cfg.HTTP.Port = cast.ToInt(getOrReturnDefault("HTTP_PORT", 8080))

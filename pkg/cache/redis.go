@@ -8,12 +8,12 @@ import (
 	"time"
 )
 
-type Cache struct {
+type ICache struct {
 	Client *redis.Client
 }
 
-func NewClient(conf config.Configs) *Cache {
-	client := &Cache{
+func NewClient(conf config.Configs) *ICache {
+	client := &ICache{
 		Client: redis.NewClient(&redis.Options{
 			Addr:     fmt.Sprintf("%s:%d", conf.Redis.Host, conf.Redis.Port),
 			Password: conf.Redis.Password,
@@ -24,14 +24,14 @@ func NewClient(conf config.Configs) *Cache {
 	return client
 }
 
-func (c *Cache) Set(ctx context.Context, key string, value interface{}, ttl int) error {
+func (c *ICache) Set(ctx context.Context, key string, value interface{}, ttl int) error {
 	return c.Client.Set(ctx, key, value, time.Duration(ttl)*time.Second).Err()
 }
 
-func (c *Cache) Keys(ctx context.Context, pattern string) ([]string, error) {
+func (c *ICache) Keys(ctx context.Context, pattern string) ([]string, error) {
 	return c.Client.Keys(ctx, pattern).Result()
 }
 
-func (c *Cache) Get(ctx context.Context, key string) (string, error) {
+func (c *ICache) Get(ctx context.Context, key string) (string, error) {
 	return c.Client.Get(ctx, key).Result()
 }
