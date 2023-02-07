@@ -10,11 +10,11 @@ import (
 	"github.com/Imomali1/todo-app/config"
 )
 
-type PostgresClient struct {
+type PostgresDB struct {
 	DB *sql.DB
 }
 
-func InitDB(conf config.Configs) (*PostgresClient, error) {
+func InitDB(conf config.Configs) (*PostgresDB, error) {
 	psqlConn := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable",
 		conf.Postgres.Host, conf.Postgres.Port, conf.Postgres.User, conf.Postgres.Password, conf.Postgres.DB)
 
@@ -28,7 +28,7 @@ func InitDB(conf config.Configs) (*PostgresClient, error) {
 		return nil, err
 	}
 
-	return &PostgresClient{
+	return &PostgresDB{
 		DB: db,
 	}, nil
 }
