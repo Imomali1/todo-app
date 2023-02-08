@@ -1,9 +1,12 @@
 package models
 
 type CreateListRequest struct {
+	Id int `json:"id"`
+	Name string `json:"name"`
 }
 
 type CreateListResponse struct {
+
 }
 
 type GetListsRequest struct {

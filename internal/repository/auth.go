@@ -16,13 +16,16 @@ func NewAuthRepository(db *sql.DB) *AuthRepos {
 }
 
 func (r *AuthRepos) Register(req models.RegisterRequest) (models.RegisterResponse, error) {
-	return r.Register(req)
+	//TODO implement me
+	panic("implement me")
 }
 
 func (r *AuthRepos) Login(req models.LoginRequest) (models.LoginResponse, error) {
-	return r.Login(req)
+	//TODO implement me
+	panic("implement me")
 }
 
 func (r *AuthRepos) Logout(req models.LogoutRequest) (models.LogoutResponse, error) {
-	return r.Logout(req)
+	//TODO implement me
+	panic("implement me")
 }
